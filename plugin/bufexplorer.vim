@@ -348,13 +348,15 @@ function! StartBufExplorer(open)
 
     " Make sure there is only one explorer open at a time.
     if s:running == 1
-        call s:BEError("WHAT THE 1")
+            " Close the BE window.
+            call s:BEClose("")
+        " call s:BEError("WHAT THE 1")
         " Go to the open buffer.
-        if has("gui")
-            call s:BEError("WHAT THE 2")
-            call s:BEError(name)
-            exec "drop" name
-        endif
+        " if has("gui")
+            " call s:BEError("WHAT THE 2")
+            " call s:BEError(name)
+            " exec "drop" name
+        " endif
 
         return
     endif
@@ -433,6 +435,7 @@ function! s:BEMapKeys()
   endif
 
   nnoremap <buffer> <silent> <F1>          :call <SID>BEToggleHelp()<cr>
+  nnoremap <buffer> <silent> <Esc>         :call <SID>BEClose("quit")<cr>
   nnoremap <buffer> <silent> <2-leftmouse> :call <SID>BESelectBuffer()<cr>
   nnoremap <buffer> <silent> <cr>          :call <SID>BESelectBuffer()<cr>
   nnoremap <buffer> <silent> o             :call <SID>BESelectBuffer()<cr>
